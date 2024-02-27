@@ -712,11 +712,13 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
           });\n
         """;
     }
-    if (c.onIframeClick != null) {
+    if (c.onClickOutsideEditor != null) {
       callbacks = callbacks +
           """
-          \$(document).on('click', function(_) {
-            window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: onIframeClick"}), "*");
+          \$(document).on('click', function(event) {
+            if (\$(event.target).closest('.note-editing-area').length === 0) {
+            window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: onClickOutsideEditor"}), "*");
+            }
           });\n
         """;
     }
@@ -818,8 +820,8 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         if (data['type'].contains('onScroll')) {
           c.onScroll!.call();
         }
-        if (data['type'].contains('onIframeClick')) {
-          c.onIframeClick!.call();
+        if (data['type'].contains('onClickOutsideEditor')) {
+          c.onClickOutsideEditor!.call();
         }
         if (data['type'].contains('characterCount')) {
           widget.controller.characterCount = data['totalChars'];

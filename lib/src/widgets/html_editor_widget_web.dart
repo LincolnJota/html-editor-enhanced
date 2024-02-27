@@ -209,15 +209,36 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
       <script type="text/javascript">
         \$(document).ready(function () {
           \$('#summernote-2').summernote({
-            placeholder: "${widget.htmlEditorOptions.hint}",
+            disableResizeEditor: ${widget.htmlEditorOptions.disableResizeEditor},
+            placeholder: '${widget.htmlEditorOptions.hint}',
             tabsize: 2,
-            height: ${widget.otherOptions.height},
+            height: '${widget.otherOptions.height}',
+            width: '8.27in',
             disableGrammar: false,
             spellCheck: ${widget.htmlEditorOptions.spellCheck},
             maximumFileSize: $maximumFileSize,
             ${widget.htmlEditorOptions.customOptions}
             $summernoteCallbacks
           });
+
+          \$('.note-statusbar').hide();
+          \$('html, body').css({
+            /*'overflow': 'hidden', */
+            'display': 'flex',
+            'justify-content': 'center',
+          });
+          \$('.note-editable').css({
+              'overflow-y': 'overlay', /* Habilita a barra de rolagem vertical */
+              'scrollbar-width': 'thin', /* Espessura da barra de rolagem */
+              'scrollbar-color': '#ffb200 transparent', /* Cor da barra de rolagem */
+              'scrollbar-gutter': 'auto',
+              'background': '#fff',
+
+          });
+          \$('.note-editor.note-frame').css({
+            'margin-top': '20px',
+            'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+          })
           
           \$('#summernote-2').on('summernote.change', function(_, contents, \$editable) {
             window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: onChangeContent", "contents": contents}), "*");
@@ -471,7 +492,8 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
       // ignore: unsafe_html, necessary to load HTML string
       ..srcdoc = htmlString
       ..style.border = 'none'
-      ..style.overflow = 'hidden'
+      /* ..style.backgroundColor = 'red' */
+      /* ..style.overflow = 'hidden' */
       ..onLoad.listen((event) async {
         if (widget.htmlEditorOptions.disabled && !alreadyDisabled) {
           widget.controller.disable();
@@ -513,9 +535,8 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
                 widget.callbacks!.onChangeContent != null) {
               widget.callbacks!.onChangeContent!.call(data['contents']);
             }
-            if (widget.htmlEditorOptions.shouldEnsureVisible &&
-                Scrollable.of(context) != null) {
-              Scrollable.of(context)!.position.ensureVisible(
+            if (widget.htmlEditorOptions.shouldEnsureVisible) {
+              Scrollable.of(context).position.ensureVisible(
                   context.findRenderObject()!,
                   duration: const Duration(milliseconds: 100),
                   curve: Curves.easeIn);
@@ -541,47 +562,43 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.htmlEditorOptions.autoAdjustHeight
-          ? actualHeight
-          : widget.otherOptions.height,
-      child: Column(
-        children: <Widget>[
-          widget.htmlToolbarOptions.toolbarPosition ==
-                  ToolbarPosition.aboveEditor
-              ? ToolbarWidget(
-                  key: toolbarKey,
-                  controller: widget.controller,
-                  htmlToolbarOptions: widget.htmlToolbarOptions,
-                  callbacks: widget.callbacks)
-              : Container(height: 0, width: 0),
-          Expanded(
-              child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: FutureBuilder<bool>(
-                      future: summernoteInit,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return HtmlElementView(
+    return Column(
+      children: <Widget>[
+        widget.htmlToolbarOptions.toolbarPosition == ToolbarPosition.aboveEditor
+            ? ToolbarWidget(
+                key: toolbarKey,
+                controller: widget.controller,
+                htmlToolbarOptions: widget.htmlToolbarOptions,
+                callbacks: widget.callbacks)
+            : Container(height: 0, width: 0),
+        Expanded(
+            child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: FutureBuilder<bool>(
+                    future: summernoteInit,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Container(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          child: HtmlElementView(
                             viewType: createdViewId,
-                          );
-                        } else {
-                          return Container(
-                              height: widget.htmlEditorOptions.autoAdjustHeight
-                                  ? actualHeight
-                                  : widget.otherOptions.height);
-                        }
-                      }))),
-          widget.htmlToolbarOptions.toolbarPosition ==
-                  ToolbarPosition.belowEditor
-              ? ToolbarWidget(
-                  key: toolbarKey,
-                  controller: widget.controller,
-                  htmlToolbarOptions: widget.htmlToolbarOptions,
-                  callbacks: widget.callbacks)
-              : Container(height: 0, width: 0),
-        ],
-      ),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                            height: widget.htmlEditorOptions.autoAdjustHeight
+                                ? actualHeight
+                                : widget.otherOptions.height);
+                      }
+                    }))),
+        widget.htmlToolbarOptions.toolbarPosition == ToolbarPosition.belowEditor
+            ? ToolbarWidget(
+                key: toolbarKey,
+                controller: widget.controller,
+                htmlToolbarOptions: widget.htmlToolbarOptions,
+                callbacks: widget.callbacks)
+            : Container(height: 0, width: 0),
+      ],
     );
   }
 

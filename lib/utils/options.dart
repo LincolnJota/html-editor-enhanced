@@ -24,6 +24,7 @@ class HtmlEditorOptions {
     this.mobileInitialScripts,
     this.webInitialScripts,
     this.shouldEnsureVisible = false,
+    this.disableResizeEditor = true,
     this.spellCheck = false,
   });
 
@@ -124,6 +125,11 @@ class HtmlEditorOptions {
   ///
   /// Default value is false.
   final bool spellCheck;
+
+  /// Disable resize editor at the bottom.
+  ///
+  /// Default value is true
+  final bool disableResizeEditor;
 }
 
 /// Options that modify the toolbar and its behavior

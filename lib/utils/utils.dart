@@ -11,15 +11,12 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 class PointerInterceptedDropdownMenuItem<T> extends DropdownMenuItem<T> {
   @override
-  final VoidCallback? onTap;
-  @override
   final T? value;
   @override
   final bool enabled;
 
   const PointerInterceptedDropdownMenuItem({
     Key? key,
-    this.onTap,
     this.value,
     this.enabled = true,
     AlignmentGeometry alignment = AlignmentDirectional.centerStart,

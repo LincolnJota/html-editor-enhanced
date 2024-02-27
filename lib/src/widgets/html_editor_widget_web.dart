@@ -1,6 +1,7 @@
 export 'dart:html';
 
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -513,6 +514,7 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         final jsonEncoder = JsonEncoder();
         var jsonStr = jsonEncoder.convert(data);
         var jsonStr2 = jsonEncoder.convert(data2);
+
         html.window.onMessage.listen((event) {
           var data = json.decode(event.data);
           if (data['type'] != null &&
@@ -710,6 +712,14 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
           });\n
         """;
     }
+    if (c.onIframeClick != null) {
+      callbacks = callbacks +
+          """
+          \$(document).on('click', function(_) {
+            window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: onIframeClick"}), "*");
+          });\n
+        """;
+    }
     return callbacks;
   }
 
@@ -807,6 +817,9 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         }
         if (data['type'].contains('onScroll')) {
           c.onScroll!.call();
+        }
+        if (data['type'].contains('onIframeClick')) {
+          c.onIframeClick!.call();
         }
         if (data['type'].contains('characterCount')) {
           widget.controller.characterCount = data['totalChars'];

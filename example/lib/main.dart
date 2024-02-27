@@ -123,6 +123,8 @@ class _HtmlEditorExampleState extends State<HtmlEditorExample> {
             print('codeview either focused or unfocused');
           }, onInit: () {
             print('init');
+          }, onIframeClick: () {
+            print('iframe click');
           },
               //this is commented because it overrides the default Summernote handlers
               /*onImageLinkInsert: (String? url) {

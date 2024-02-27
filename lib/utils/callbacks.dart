@@ -25,6 +25,7 @@ class Callbacks {
     this.onNavigationRequestMobile,
     this.onPaste,
     this.onScroll,
+    this.onIframeClick,
   });
 
   /// Called before certain commands are fired and the editor is in rich text view.
@@ -79,6 +80,9 @@ class Callbacks {
   /// when the code view editor gains focus, instead use [onBlurCodeview] for
   /// that.
   void Function()? onFocus;
+
+  /// Called when iframe has clicked, if you searching for clicking in a editor, instead use [onBlur]
+  void Function()? onIframeClick;
 
   /// Called whenever either the rich text field or the codeview field loses
   /// focus. This will also be triggered when switching from the rich text editor

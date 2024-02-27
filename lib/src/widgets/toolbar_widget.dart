@@ -487,8 +487,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                               .colorScheme
                               .onSurface
                               .withOpacity(0.12))),
-          child: CustomDropdownButtonHideUnderline(
-            child: CustomDropdownButton<String>(
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
               elevation: widget.htmlToolbarOptions.dropdownElevation,
               icon: widget.htmlToolbarOptions.dropdownIcon,
               iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -496,84 +496,74 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               itemHeight: widget.htmlToolbarOptions.dropdownItemHeight,
               focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
               dropdownColor: widget.htmlToolbarOptions.dropdownBackgroundColor,
-              menuDirection: widget.htmlToolbarOptions.dropdownMenuDirection ??
+              /* menuDirection: widget.htmlToolbarOptions.dropdownMenuDirection ??
                   (widget.htmlToolbarOptions.toolbarPosition ==
                           ToolbarPosition.belowEditor
                       ? DropdownMenuDirection.up
-                      : DropdownMenuDirection.down),
+                      : DropdownMenuDirection.down), */
               menuMaxHeight: widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                   MediaQuery.of(context).size.height / 3,
               style: widget.htmlToolbarOptions.textStyle,
               items: [
-                CustomDropdownMenuItem(
-                    value: 'p',
-                    child: PointerInterceptor(child: Text('Normal'))),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
+                    value: 'p', child: Text('Normal')),
+                PointerInterceptedDropdownMenuItem(
                     value: 'blockquote',
-                    child: PointerInterceptor(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  left: BorderSide(
-                                      color: Colors.grey, width: 3.0))),
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text('Quote',
-                              style: TextStyle(
-                                  fontFamily: 'times', color: Colors.grey))),
-                    )),
-                CustomDropdownMenuItem(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    color: Colors.grey, width: 3.0))),
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text('Quote',
+                            style: TextStyle(
+                                fontFamily: 'times', color: Colors.grey)))),
+                PointerInterceptedDropdownMenuItem(
                     value: 'pre',
-                    child: PointerInterceptor(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.grey),
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text('Code',
-                              style: TextStyle(
-                                  fontFamily: 'courier', color: Colors.white))),
-                    )),
-                CustomDropdownMenuItem(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey),
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text('Code',
+                            style: TextStyle(
+                                fontFamily: 'courier', color: Colors.white)))),
+                PointerInterceptedDropdownMenuItem(
                   value: 'h1',
-                  child: PointerInterceptor(
-                      child: Text('Header 1',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 32))),
+                  child: Text('Header 1',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
                 ),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
                   value: 'h2',
-                  child: PointerInterceptor(
-                      child: Text('Header 2',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24))),
+                  child: Text('Header 2',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
                 ),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
                   value: 'h3',
-                  child: PointerInterceptor(
-                      child: Text('Header 3',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18))),
+                  child: Text('Header 3',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 ),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
                   value: 'h4',
                   child: PointerInterceptor(
                       child: Text('Header 4',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16))),
                 ),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
                   value: 'h5',
-                  child: PointerInterceptor(
-                      child: Text('Header 5',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13))),
+                  child: Text('Header 5',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                 ),
-                CustomDropdownMenuItem(
+                PointerInterceptedDropdownMenuItem(
                   value: 'h6',
-                  child: PointerInterceptor(
-                      child: Text('Header 6',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 11))),
+                  child: Text('Header 6',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
                 ),
               ],
               value: _fontSelectedItem,
@@ -619,8 +609,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<String>(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -629,34 +619,31 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+                /*   menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'Courier New',
-                    child: PointerInterceptor(
-                        child: Text('Courier New',
-                            style: TextStyle(fontFamily: 'Courier'))),
+                    child: Text('Courier New',
+                        style: TextStyle(fontFamily: 'Courier')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'sans-serif',
-                    child: PointerInterceptor(
-                        child: Text('Sans Serif',
-                            style: TextStyle(fontFamily: 'sans-serif'))),
+                    child: Text('Sans Serif',
+                        style: TextStyle(fontFamily: 'sans-serif')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'Times New Roman',
-                    child: PointerInterceptor(
-                        child: Text('Times New Roman',
-                            style: TextStyle(fontFamily: 'Times'))),
+                    child: Text('Times New Roman',
+                        style: TextStyle(fontFamily: 'Times')),
                   ),
                 ],
                 value: _fontNameSelectedItem,
@@ -701,8 +688,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<double>(
+            child: PointerInterceptedDropdownMenuItem(
+              child: DropdownButton<double>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -711,58 +698,51 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+                /*  menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 1,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "11" : "8"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "11" : "8"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 2,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "13" : "10"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "13" : "10"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 3,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "16" : "12"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 4,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "19" : "14"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "19" : "14"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 5,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "24" : "18"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "24" : "18"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 6,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "32" : "24"} $_fontSizeUnitSelectedItem"),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 7,
-                    child: PointerInterceptor(
-                        child: Text(
-                            "${_fontSizeUnitSelectedItem == "px" ? "48" : "36"} $_fontSizeUnitSelectedItem")),
+                    child: Text(
+                        "${_fontSizeUnitSelectedItem == "px" ? "48" : "36"} $_fontSizeUnitSelectedItem"),
                   ),
                 ],
                 value: _fontSizeSelectedItem,
@@ -831,8 +811,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<String>(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -841,24 +821,24 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+                /*  menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'pt',
-                    child: PointerInterceptor(child: Text('pt')),
+                    child: Text('pt'),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'px',
-                    child: PointerInterceptor(child: Text('px')),
+                    child: Text('px'),
                   ),
                 ],
                 value: _fontSizeUnitSelectedItem,
@@ -1285,8 +1265,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<String>(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -1295,46 +1275,46 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+                /*  menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'decimal',
                     child: PointerInterceptor(child: Text('1. Numbered')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'lower-alpha',
                     child: PointerInterceptor(child: Text('a. Lower Alpha')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'upper-alpha',
                     child: PointerInterceptor(child: Text('A. Upper Alpha')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'lower-roman',
                     child: PointerInterceptor(child: Text('i. Lower Roman')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'upper-roman',
                     child: PointerInterceptor(child: Text('I. Upper Roman')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'disc',
                     child: PointerInterceptor(child: Text('• Disc')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'circle',
                     child: PointerInterceptor(child: Text('○ Circle')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'square',
                     child: PointerInterceptor(child: Text('■ Square')),
                   ),
@@ -1507,8 +1487,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<double>(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<double>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -1517,44 +1497,44 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+                /* menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
-                      value: 1, child: PointerInterceptor(child: Text('1.0'))),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
+                      value: 1, child: Text('1.0')),
+                  PointerInterceptedDropdownMenuItem(
                     value: 1.2,
-                    child: PointerInterceptor(child: Text('1.2')),
+                    child: Text('1.2'),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 1.4,
                     child: PointerInterceptor(child: Text('1.4')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 1.5,
                     child: PointerInterceptor(child: Text('1.5')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 1.6,
                     child: PointerInterceptor(child: Text('1.6')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 1.8,
                     child: PointerInterceptor(child: Text('1.8')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 2,
                     child: PointerInterceptor(child: Text('2.0')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                       value: 3, child: PointerInterceptor(child: Text('3.0'))),
                 ],
                 value: _lineHeightSelectedItem,
@@ -1663,8 +1643,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .colorScheme
                                 .onSurface
                                 .withOpacity(0.12))),
-            child: CustomDropdownButtonHideUnderline(
-              child: CustomDropdownButton<String>(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -1673,30 +1653,31 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 focusColor: widget.htmlToolbarOptions.dropdownFocusColor,
                 dropdownColor:
                     widget.htmlToolbarOptions.dropdownBackgroundColor,
-                menuDirection:
+
+                /* menuDirection:
                     widget.htmlToolbarOptions.dropdownMenuDirection ??
                         (widget.htmlToolbarOptions.toolbarPosition ==
                                 ToolbarPosition.belowEditor
                             ? DropdownMenuDirection.up
-                            : DropdownMenuDirection.down),
+                            : DropdownMenuDirection.down), */
                 menuMaxHeight:
                     widget.htmlToolbarOptions.dropdownMenuMaxHeight ??
                         MediaQuery.of(context).size.height / 3,
                 style: widget.htmlToolbarOptions.textStyle,
                 items: [
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'lower',
                     child: PointerInterceptor(child: Text('lowercase')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'sentence',
                     child: PointerInterceptor(child: Text('Sentence case')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'title',
                     child: PointerInterceptor(child: Text('Title Case')),
                   ),
-                  CustomDropdownMenuItem(
+                  PointerInterceptedDropdownMenuItem(
                     value: 'upper',
                     child: PointerInterceptor(child: Text('UPPERCASE')),
                   ),

@@ -7,6 +7,30 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
+
+class PointerInterceptedDropdownMenuItem<T> extends DropdownMenuItem<T> {
+  @override
+  final VoidCallback? onTap;
+  @override
+  final T? value;
+  @override
+  final bool enabled;
+
+  const PointerInterceptedDropdownMenuItem({
+    Key? key,
+    this.onTap,
+    this.value,
+    this.enabled = true,
+    AlignmentGeometry alignment = AlignmentDirectional.centerStart,
+    required Widget child,
+  }) : super(key: key, alignment: alignment, child: child);
+
+  @override
+  Widget build(BuildContext context) {
+    return PointerInterceptor(child: super.build(context));
+  }
+}
 
 /// small function to always check if mounted before running setState()
 void setState(
@@ -163,7 +187,7 @@ const EdgeInsetsGeometry _kUnalignedMenuMargin =
 
 typedef DropdownButtonBuilder = List<Widget> Function(BuildContext context);
 
-class _DropdownMenuPainter extends CustomPainter {
+/* class _DropdownMenuPainter extends CustomPainter {
   _DropdownMenuPainter({
     this.color,
     this.elevation,
@@ -949,7 +973,7 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
   }
 
   TextStyle? get _textStyle =>
-      widget.style ?? Theme.of(context).textTheme.subtitle1;
+      widget.style ?? Theme.of(context).textTheme.titleMedium;
 
   void _handleTap() {
     final textDirection = Directionality.maybeOf(context);
@@ -1009,7 +1033,7 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
 
   double get _denseButtonHeight {
     final fontSize = _textStyle!.fontSize ??
-        Theme.of(context).textTheme.subtitle1!.fontSize!;
+        Theme.of(context).textTheme.titleMedium!.fontSize!;
     return max(fontSize, max(widget.iconSize, _kDenseButtonHeight));
   }
 
@@ -1199,3 +1223,4 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
     );
   }
 }
+ */

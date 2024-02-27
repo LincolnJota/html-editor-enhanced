@@ -1288,35 +1288,35 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 items: [
                   PointerInterceptedDropdownMenuItem(
                     value: 'decimal',
-                    child: PointerInterceptor(child: Text('1. Numbered')),
+                    child: Text('1. Numbered'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'lower-alpha',
-                    child: PointerInterceptor(child: Text('a. Lower Alpha')),
+                    child: Text('a. Lower Alpha'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'upper-alpha',
-                    child: PointerInterceptor(child: Text('A. Upper Alpha')),
+                    child: Text('A. Upper Alpha'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'lower-roman',
-                    child: PointerInterceptor(child: Text('i. Lower Roman')),
+                    child: Text('i. Lower Roman'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'upper-roman',
-                    child: PointerInterceptor(child: Text('I. Upper Roman')),
+                    child: Text('I. Upper Roman'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'disc',
-                    child: PointerInterceptor(child: Text('• Disc')),
+                    child: Text('• Disc'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'circle',
-                    child: PointerInterceptor(child: Text('○ Circle')),
+                    child: Text('○ Circle'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'square',
-                    child: PointerInterceptor(child: Text('■ Square')),
+                    child: Text('■ Square'),
                   ),
                 ],
                 hint: Text('Select list style'),
@@ -1516,26 +1516,26 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 1.4,
-                    child: PointerInterceptor(child: Text('1.4')),
+                    child: Text('1.4'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 1.5,
-                    child: PointerInterceptor(child: Text('1.5')),
+                    child: Text('1.5'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 1.6,
-                    child: PointerInterceptor(child: Text('1.6')),
+                    child: Text('1.6'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 1.8,
-                    child: PointerInterceptor(child: Text('1.8')),
+                    child: Text('1.8'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 2,
-                    child: PointerInterceptor(child: Text('2.0')),
+                    child: Text('2.0'),
                   ),
                   PointerInterceptedDropdownMenuItem(
-                      value: 3, child: PointerInterceptor(child: Text('3.0'))),
+                      value: 3, child: Text('3.0')),
                 ],
                 value: _lineHeightSelectedItem,
                 onChanged: (double? changed) async {
@@ -1667,19 +1667,19 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 items: [
                   PointerInterceptedDropdownMenuItem(
                     value: 'lower',
-                    child: PointerInterceptor(child: Text('lowercase')),
+                    child: Text('lowercase'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'sentence',
-                    child: PointerInterceptor(child: Text('Sentence case')),
+                    child: Text('Sentence case'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'title',
-                    child: PointerInterceptor(child: Text('Title Case')),
+                    child: Text('Title Case'),
                   ),
                   PointerInterceptedDropdownMenuItem(
                     value: 'upper',
-                    child: PointerInterceptor(child: Text('UPPERCASE')),
+                    child: Text('UPPERCASE'),
                   ),
                 ],
                 hint: Text('Change case'),

@@ -75,7 +75,6 @@ class _HtmlEditorExampleState extends State<HtmlEditorExample> {
           ),
           htmlToolbarOptions: HtmlToolbarOptions(
             initiallyExpanded: true,
-            dropdownMenuMaxHeight: 500,
             toolbarPosition: ToolbarPosition.aboveEditor, //by default
             toolbarType: ToolbarType.nativeExpandable, //by default
             onButtonPressed:

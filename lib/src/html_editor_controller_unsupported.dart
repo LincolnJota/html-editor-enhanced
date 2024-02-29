@@ -10,7 +10,7 @@ class HtmlEditorController {
   });
 
   /// Toolbar widget state to call various methods. For internal use only.
-  @internal
+  //@internal
   ToolbarWidgetState? toolbar;
 
   /// Determines whether text processing should happen on input HTML, e.g.

@@ -32,6 +32,12 @@ class ToolbarWidget extends StatefulWidget {
 
 /// Toolbar widget state
 class ToolbarWidgetState extends State<ToolbarWidget> {
+  final fontSizeDropdownKey = GlobalKey();
+  final fontSizeDropdownFocus = FocusNode();
+
+  final fontFamilyDropdownKey = GlobalKey();
+  final fontFamilyDropdownFocus = FocusNode();
+
   /// List that controls which [ToggleButtons] are selected for
   /// bold/italic/underline/clear styles
   List<bool> _fontSelected = List<bool>.filled(4, false);
@@ -91,6 +97,25 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
   /// Tracks the expanded status of the toolbar
   bool _isExpanded = false;
 
+  // Dropdown state
+  bool _dropdownIsOpen = false;
+
+  void closeDropdowns() {
+    if (fontSizeDropdownKey.currentContext != null &&
+        _dropdownIsOpen &&
+        context != fontSizeDropdownKey.currentContext) {
+      _dropdownIsOpen = false;
+      Navigator.pop(fontSizeDropdownKey.currentContext!);
+    }
+
+    if (fontFamilyDropdownKey.currentContext != null &&
+        _dropdownIsOpen &&
+        context != fontFamilyDropdownKey.currentContext) {
+      _dropdownIsOpen = false;
+      Navigator.pop(fontFamilyDropdownKey.currentContext!);
+    }
+  }
+
   @override
   void initState() {
     widget.controller.toolbar = this;
@@ -113,7 +138,25 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
         _alignSelected = List<bool>.filled(t.getIcons1().length, false);
       }
     }
+
+    fontSizeDropdownFocus.addListener(() {
+      _dropdownIsOpen = !fontSizeDropdownFocus.hasPrimaryFocus;
+      print('dropdown: $_dropdownIsOpen');
+    });
+
+    fontFamilyDropdownFocus.addListener(() {
+      _dropdownIsOpen = !fontFamilyDropdownFocus.hasPrimaryFocus;
+      print('dropdown: $_dropdownIsOpen');
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    fontSizeDropdownFocus.dispose();
+    fontFamilyDropdownFocus.dispose();
+    super.dispose();
   }
 
   void disable() {
@@ -489,6 +532,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                               .withOpacity(0.12))),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
+              key: fontSizeDropdownKey,
               elevation: widget.htmlToolbarOptions.dropdownElevation,
               icon: widget.htmlToolbarOptions.dropdownIcon,
               iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,
@@ -567,6 +611,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 ),
               ],
               value: _fontSelectedItem,
+              focusNode: fontSizeDropdownFocus,
               onChanged: (String? changed) async {
                 void updateSelectedItem(dynamic changed) {
                   if (changed is String) {
@@ -611,6 +656,8 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                                 .withOpacity(0.12))),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
+                focusNode: fontFamilyDropdownFocus,
+                key: fontFamilyDropdownKey,
                 elevation: widget.htmlToolbarOptions.dropdownElevation,
                 icon: widget.htmlToolbarOptions.dropdownIcon,
                 iconEnabledColor: widget.htmlToolbarOptions.dropdownIconColor,

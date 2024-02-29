@@ -114,8 +114,10 @@ class _HtmlEditorExampleState extends State<HtmlEditorExample> {
           }, onDialogShown: () {
             print('dialog shown');
           }, onEnter: () {
+            controller.toolbar!.closeDropdowns();
             print('enter/return pressed');
           }, onFocus: () {
+            controller.toolbar!.closeDropdowns();
             print('editor focused');
           }, onBlur: () {
             print('editor unfocused');
@@ -124,6 +126,8 @@ class _HtmlEditorExampleState extends State<HtmlEditorExample> {
           }, onInit: () {
             print('init');
           }, onClickOutsideEditor: () {
+            controller.toolbar!.closeDropdowns();
+            /* Navigator.pop(ValueKey('fontSizeDropdownKey')) */
             print('outside click');
           },
               //this is commented because it overrides the default Summernote handlers
@@ -151,6 +155,7 @@ class _HtmlEditorExampleState extends State<HtmlEditorExample> {
           }, onKeyUp: (int? keyCode) {
             print('$keyCode key released');
           }, onMouseDown: () {
+            controller.toolbar!.closeDropdowns();
             print('mouse downed');
           }, onMouseUp: () {
             print('mouse released');
